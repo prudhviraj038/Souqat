@@ -42,7 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
-                        android:id="@+id/editText12"
+                        android:id="@+id/et_g_title"
                         android:background="#00000000"
                         android:hint="Group Title"
                         android:layout_margin="5dp"
@@ -81,11 +81,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
-                        android:id="@+id/editText14"
+                        android:id="@+id/et_g_min"
                         android:background="#00000000"
-                        android:text="Min"
                         android:layout_margin="5dp"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:hint="Min"
+                        android:inputType="number" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -123,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
-                        android:id="@+id/editText13"
+                        android:id="@+id/et_g_title_ar"
                         android:background="#00000000"
                         android:textSize="14sp"
                         android:layout_margin="5dp"
@@ -162,11 +163,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ems="10"
-                        android:id="@+id/editText15"
+                        android:id="@+id/et_g_max"
                         android:background="#00000000"
                         android:textSize="14sp"
                         android:hint="Max"
-                        android:layout_margin="5dp" />
+                        android:layout_margin="5dp"
+                        android:inputType="number" />
                 </LinearLayout>
             </LinearLayout>
 

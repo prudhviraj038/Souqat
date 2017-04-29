@@ -24,5 +24,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile files('libs/volley.jar')
     compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'com.koushikdutta.ion:ion:2.+'
 
 }

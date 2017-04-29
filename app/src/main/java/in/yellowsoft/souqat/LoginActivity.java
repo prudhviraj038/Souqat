@@ -83,11 +83,11 @@ public class LoginActivity extends Activity {
                         Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        String mem_id=jsonObject.getString("member_id");
+                        String mem_id=jsonObject.getString("shop_id");
                         String name=jsonObject.getString("name");
                         Settings.setUserid(LoginActivity.this, mem_id, name);
                         Toast.makeText(LoginActivity.this, name, Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(LoginActivity.this,AddProductActivity.class);
+                        Intent intent=new Intent(LoginActivity.this,ProductActivity.class);
                         startActivity(intent);
                     }
 
