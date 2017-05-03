@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Chinni on 05-05-2016.
  */
 public class Products implements Serializable {
-    String res_id,title,title_ar,price,about,about_ar,description,description_ar,stock,option_title,option__title_ar;
+    String res_id,title,title_ar,price,about,about_ar,description,description_ar,stock,option_title,option_title_ar;
     ArrayList<Images> images;
     ArrayList<Groups> groups;
     Products(JSONObject jsonObject){
@@ -27,12 +27,12 @@ public class Products implements Serializable {
             this.about_ar=jsonObject.getString("about_ar");;
             this.description=jsonObject.getString("description");;
             this.description_ar=jsonObject.getString("description_ar");;
-            this.option_title=jsonObject.getString("option_title");;
-            this.option__title_ar=jsonObject.getString("option__title_ar");
+//            this.option_title=jsonObject.getString("options_title");;
+//            this.option_title_ar=jsonObject.getString("options_title_ar");
             this.groups = new ArrayList<>();
             this.images = new ArrayList<>();
             for(int i = 0;i<jsonObject.getJSONArray("group").length();i++){
-                try {;
+                try {
                     Groups temp = new Groups(jsonObject.getJSONArray("group").getJSONObject(i));
                     this.groups.add(temp);
                 } catch (JSONException e) {
@@ -41,7 +41,7 @@ public class Products implements Serializable {
 
             }
             for(int i = 0;i<jsonObject.getJSONArray("images").length();i++){
-                try {;
+                try {
                     Images temp = new Images(jsonObject.getJSONArray("images").getJSONObject(i));
                     this.images.add(temp);
                 } catch (JSONException e) {
@@ -76,7 +76,7 @@ public class Products implements Serializable {
     }
     public String getoption_title(Context context) {
         if(Settings.get_user_language(context).equals("ar"))
-            return option__title_ar;
+            return option_title_ar;
         else
             return  option_title;
     }
@@ -140,7 +140,7 @@ public class Products implements Serializable {
         Images(JSONObject jsonObject){
             try {
                 this.img=jsonObject.getString("image");
-                this.thumb=jsonObject.getString("thumb");
+//                this.thumb=jsonObject.getString("thumb");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

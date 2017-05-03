@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#254524">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -53,49 +52,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="10dp"
-                android:layout_height="match_parent"></LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Minimum"
-                    android:id="@+id/textView22"
-                    android:textSize="15sp"
-                    android:textColor="#ffffff"
-                    android:layout_marginBottom="5dp"
-                    android:visibility="gone" />
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@drawable/white_rounded_corners_with_bo" >
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:ems="10"
-                        android:id="@+id/et_g_min"
-                        android:background="#00000000"
-                        android:layout_margin="5dp"
-                        android:textSize="14sp"
-                        android:hint="Min"
-                        android:inputType="number" />
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -132,16 +89,19 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="10dp"
-                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp" >
+                android:layout_marginBottom="5dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -172,6 +132,42 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minimum"
+                    android:id="@+id/textView22"
+                    android:textSize="15sp"
+                    android:textColor="#ffffff"
+                    android:layout_marginBottom="5dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/white_rounded_corners_with_bo">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:id="@+id/et_g_min"
+                        android:background="#00000000"
+                        android:layout_margin="5dp"
+                        android:textSize="14sp"
+                        android:hint="Min"
+                        android:inputType="number" />
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
         <TextView
@@ -180,7 +176,7 @@
             android:text="Add Options"
             android:id="@+id/add_options_tv"
             android:layout_margin="10dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/blue"
             android:textSize="15sp"
             android:gravity="end" />
 

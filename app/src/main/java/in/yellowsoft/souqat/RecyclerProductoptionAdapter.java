@@ -48,6 +48,11 @@ public class RecyclerProductoptionAdapter extends RecyclerView.Adapter<RecyclerP
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        if(grouplist.size()!=0){
+            holder.o_title.setText(grouplist.get(position).title);
+            holder.o_title_ar.setText(grouplist.get(position).title_ar);
+            holder.price.setText(grouplist.get(position).price);
+        }
         holder.o_title.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

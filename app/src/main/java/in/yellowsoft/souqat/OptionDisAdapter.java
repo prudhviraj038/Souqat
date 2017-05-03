@@ -1,11 +1,14 @@
 package in.yellowsoft.souqat;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -53,9 +56,12 @@ public class OptionDisAdapter extends BaseAdapter{
         rowView = inflater.inflate(R.layout.option_dis_item, null);
         holder.com_name=(TextView) rowView.findViewById(R.id.o_title_adp);
         holder.price=(TextView) rowView.findViewById(R.id.o_price_adp);
+        Log.e("option size",String.valueOf(restaurants.groups.get(pos).addons.size()));
         holder.com_name.setText(restaurants.groups.get(pos).addons.get(position).option);
         holder.price.setText(restaurants.groups.get(pos).addons.get(position).price);
+
         return rowView;
     }
+
 
 }

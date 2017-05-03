@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#254524">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -33,8 +32,8 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/listView"
+            android:layout_height="match_parent"
+            android:id="@+id/o_dis_lv"
             android:layout_margin="10dp" />
     </LinearLayout>
 

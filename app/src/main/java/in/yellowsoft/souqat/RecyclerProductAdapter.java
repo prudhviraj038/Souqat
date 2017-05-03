@@ -1,13 +1,9 @@
 package in.yellowsoft.souqat;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -20,7 +16,7 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
 
 
     private List<Group> grouplist;
-    AddProduct2Activity addProduct2Activity;
+    AddProductActivity addProduct2Activity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, year, genre,add_options_tv;
@@ -32,12 +28,13 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
             g_title_ar = (EditText) view.findViewById(R.id.et_g_title_ar);
             min = (EditText) view.findViewById(R.id.et_g_min);
             max = (EditText) view.findViewById(R.id.et_g_max);
+            int h=itemView.getHeight();
 //            year = (TextView) view.findViewById(R.id.year);
         }
     }
 
 
-    public RecyclerProductAdapter(List<Group> grouplist, AddProduct2Activity addProduct2Activity) {
+    public RecyclerProductAdapter(List<Group> grouplist, AddProductActivity addProduct2Activity) {
         this.grouplist = grouplist;
         this.addProduct2Activity = addProduct2Activity;
     }
@@ -55,8 +52,15 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
                 return new MyViewHolder(itemView);
     }
 
+
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        if(grouplist.size()!=0){
+            holder.g_title.setText(grouplist.get(position).title);
+            holder.g_title_ar.setText(grouplist.get(position).title_ar);
+            holder.min.setText(grouplist.get(position).min);
+            holder.max.setText(grouplist.get(position).max);
+        }
         holder.g_title.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -65,6 +69,7 @@ public class RecyclerProductAdapter extends RecyclerView.Adapter<RecyclerProduct
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 grouplist.get(position).title=s.toString();
             }
 

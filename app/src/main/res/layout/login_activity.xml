@@ -7,22 +7,23 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#254524"
+        android:background="#e8e8e8"
         android:gravity="center_horizontal">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="50dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Souqat"
-                android:id="@+id/textView3"
-                android:textColor="#ffffff"
-                android:textSize="40sp" />
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageView6"
+                android:src="@drawable/logo"
+                android:adjustViewBounds="true" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -34,7 +35,12 @@
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"></LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -48,13 +54,13 @@
                     android:text="Email"
                     android:id="@+id/sta_email_tv"
                     android:textSize="15sp"
-                    android:textColor="#ffffff"
+                    android:textColor="#000"
                     android:layout_marginBottom="5dp" />
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/white_rounded_corners_with_bo">
 
                     <EditText
@@ -62,7 +68,13 @@
                         android:layout_height="match_parent"
                         android:inputType="textEmailAddress"
                         android:id="@+id/et_email"
-                        android:background="#00000000" />
+                        android:background="#00000000"
+                        android:textColor="#000"
+                        android:singleLine="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="7dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -77,13 +89,13 @@
                     android:text="Password"
                     android:id="@+id/sta_password_tv"
                     android:textSize="15sp"
-                    android:textColor="#ffffff"
+                    android:textColor="#000"
                     android:layout_marginBottom="5dp" />
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/white_rounded_corners_with_bo" >
 
                     <EditText
@@ -92,7 +104,13 @@
                         android:inputType="textPassword"
                         android:ems="10"
                         android:id="@+id/et_password"
-                        android:background="#00000000" />
+                        android:background="#00000000"
+                        android:textColor="#000"
+                        android:singleLine="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="7dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -102,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="Forgot Password"
                 android:id="@+id/fp_tv"
-                android:textColor="#ffffff"
+                android:textColor="#000"
                 android:textSize="18sp"
                 android:layout_marginTop="20dp" />
         </LinearLayout>

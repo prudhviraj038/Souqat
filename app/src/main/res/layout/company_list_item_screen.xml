@@ -5,26 +5,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f3f3f3"
     android:id="@+id/fl"
-    android:nestedScrollingEnabled="true"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp">
+    android:nestedScrollingEnabled="true">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/fields_rounded_corners"
-        android:padding="5dp">
+        android:background="@drawable/white_rounded_corners_with_bo"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:padding="5dp">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -67,47 +65,91 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kababji"
                         android:id="@+id/company_list_name"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:singleLine="true"
                         android:ellipsize="end"
-                        android:layout_weight="1" />
+                        android:textColor="@color/blue" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stock"
+                        android:id="@+id/textView39"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:id="@+id/textView40"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Text"
+                        android:id="@+id/p_stock_tv"
+                        android:textSize="15sp"
+                        android:textColor="#000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price"
+                        android:id="@+id/textView3"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:id="@+id/textView38"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New Text"
                         android:id="@+id/p_price_tv"
-                        android:textSize="15sp" />
-
+                        android:textSize="15sp"
+                        android:textColor="#000"
+                        android:singleLine="true" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Arabic, Lebanese, Grill"
-                    android:id="@+id/company_list_items"
-                    android:textColor="#285b6e"
-                    android:textSize="12sp"
-                    android:singleLine="true"
-                    android:ellipsize="end" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New Text"
-                    android:id="@+id/p_stock_tv"
-                    android:textSize="15sp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="......................................................................................................................................................................................................................................................................................................................................................................................................"
+        android:id="@+id/textView41"
+        android:singleLine="true"
+        android:textColor="#ffbf0807" />
 
 </LinearLayout>

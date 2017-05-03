@@ -3,205 +3,301 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#254524">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="#ffffff"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product List"
-                android:id="@+id/textView5"
-                android:textColor="#000"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <ViewFlipper
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewFlipper2" >
+            android:layout_height="match_parent"
+            android:background="#e8e8e8">
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="40dp"
+                android:background="#009344"
+                android:gravity="center"
+                android:padding="5dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:id="@+id/plv_back"
+                    android:src="@drawable/back"
+                    android:tint="#ffffff" />
 
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/p_lv" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product List"
+                    android:id="@+id/textView5"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
 
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_alignParentBottom="true"
-                        android:layout_margin="15dp">
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/color_rounded_corners_with_bo"
-                            android:id="@+id/add_new_ll" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Add New"
-                                android:id="@+id/textView18"
-                                android:textColor="#ffffff"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_marginBottom="10dp"
-                                android:textSize="15sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/imageView5"
+                    android:src="@drawable/back"
+                    android:tint="#000"
+                    android:visibility="invisible" />
             </LinearLayout>
 
-            <ScrollView
+            <ViewFlipper
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/scrollView2" >
+                android:id="@+id/viewFlipper2"
+                android:layout_marginBottom="40dp">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <view
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="225dp"
-                        class="com.daimajia.slider.library.Tricks.ViewPagerEx"
-                        android:id="@+id/view"
-                        android:clickable="false" />
+                        android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#ffffff"
-                        android:padding="10dp">
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/p_lv"
+                            android:divider="#00000000" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="New Text"
-                            android:id="@+id/p_dis_title"
-                            android:layout_weight="1"
-                            android:textColor="#000"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="New Text"
-                            android:id="@+id/p_dis_price"
-                            android:textColor="#000"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#ffffff"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Stock"
-                            android:id="@+id/textView19"
-                            android:textColor="#000"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="New Text"
-                            android:id="@+id/p_dis_stock"
-                            android:textColor="#000"
-                            android:textSize="15sp"
-                            android:layout_weight="1"
-                            android:gravity="end" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#ffffff"
-                        android:padding="10dp"
-                        android:layout_marginTop="10dp" >
-
-                        <TextView
+                        <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Stock"
-                            android:id="@+id/p_dis_des"
-                            android:textColor="#000"
-                            android:textSize="15sp"
-                            android:minLines="5" />
+                            android:gravity="end"
+                            android:layout_alignParentBottom="true"
+                            android:layout_margin="15dp">
 
-                    </LinearLayout>
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/color_rounded_corners_with_bo"
+                                android:id="@+id/add_new_ll" >
 
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/p_dis_g_lv"
-                        android:layout_margin="10dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Add New"
+                                    android:id="@+id/textView18"
+                                    android:textColor="#ffffff"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/scrollView2" >
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:layout_marginTop="25dp" >
+                        android:layout_height="match_parent">
+
+                        <com.daimajia.slider.library.SliderLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="246dp"
+                            android:id="@+id/product_background_image"
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitXY" />
 
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/color_rounded_corners_with_bo"
-                            android:id="@+id/edit_p_ll" >
+                            android:background="#ffffff"
+                            android:padding="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Edit"
-                                android:id="@+id/textView17"
-                                android:textColor="#ffffff"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_marginBottom="10dp"
+                                android:text="New Text"
+                                android:id="@+id/p_dis_title"
+                                android:layout_weight="1"
+                                android:textColor="#000"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="New Text"
+                                android:id="@+id/p_dis_price"
+                                android:textColor="#000"
                                 android:textSize="15sp" />
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffffff"
+                            android:padding="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Stock"
+                                android:id="@+id/textView19"
+                                android:textColor="#000"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="New Text"
+                                android:id="@+id/p_dis_stock"
+                                android:textColor="#000"
+                                android:textSize="15sp"
+                                android:layout_weight="1"
+                                android:gravity="end" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#ffffff"
+                            android:padding="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="About"
+                                android:id="@+id/p_dis_des"
+                                android:textColor="#000"
+                                android:textSize="15sp"
+                                android:minLines="5" />
+
+                        </LinearLayout>
+
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/p_dis_g_lv"
+                            android:layout_margin="10dp" />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/color_rounded_corners_with_bo"
+                                android:id="@+id/edit_p_ll" >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Edit"
+                                    android:id="@+id/textView17"
+                                    android:textColor="#ffffff"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
                     </LinearLayout>
+                </ScrollView>
 
-                </LinearLayout>
-            </ScrollView>
+            </ViewFlipper>
 
-        </ViewFlipper>
+        </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="#009344"
+            android:divider="@drawable/footer_divider"
+            android:showDividers="middle">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/p1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product List"
+                    android:id="@+id/textView26"
+                    android:layout_margin="10dp"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/o1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Orders List"
+                    android:id="@+id/textView27"
+                    android:layout_margin="10dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/s1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Settings"
+                    android:id="@+id/textView28"
+                    android:layout_margin="10dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
 </LinearLayout>

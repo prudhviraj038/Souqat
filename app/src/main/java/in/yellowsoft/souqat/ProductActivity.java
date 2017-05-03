@@ -1,18 +1,18 @@
 package in.yellowsoft.souqat;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +24,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +34,7 @@ import java.util.ArrayList;
 
 public class ProductActivity extends Activity {
     ListView lv,g_lv;
+    ImageView back;
     ProductlistAdapter productlistAdapter;
     GroupDisAdapter groupDisAdapter;
     ArrayList<Products> productses;
@@ -42,7 +42,7 @@ public class ProductActivity extends Activity {
     private SliderLayout mDemoSlider;
     int pos;
     TextView p_title,price,des,stock;
-    LinearLayout edit,add_new;
+    LinearLayout edit,add_new,o1,s1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,14 +50,18 @@ public class ProductActivity extends Activity {
         productses=new ArrayList<>();
         get_products();
         vf=(ViewFlipper)findViewById(R.id.viewFlipper2);
+        back=(ImageView)findViewById(R.id.plv_back);
         lv=(ListView)findViewById(R.id.p_lv);
         productlistAdapter=new ProductlistAdapter(this,productses);
         edit=(LinearLayout)findViewById(R.id.edit_p_ll);
         add_new=(LinearLayout)findViewById(R.id.add_new_ll);
+        o1=(LinearLayout)findViewById(R.id.o1);
+        s1=(LinearLayout)findViewById(R.id.s1);
         p_title=(TextView)findViewById(R.id.p_dis_title);
         stock=(TextView)findViewById(R.id.p_dis_stock);
         price=(TextView)findViewById(R.id.p_dis_price);
         des=(TextView)findViewById(R.id.p_dis_des);
+        setListViewHeightBasedOnItems(lv);
         lv.setAdapter(productlistAdapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,17 +69,47 @@ public class ProductActivity extends Activity {
                 vf.setDisplayedChild(1);
                 pos = position;
                 g_lv = (ListView) findViewById(R.id.p_dis_g_lv);
+                Log.e("groupSize", String.valueOf(productses.get(position).images.size()));
                 groupDisAdapter = new GroupDisAdapter(ProductActivity.this, productses.get(position));
                 g_lv.setAdapter(groupDisAdapter);
+                groupDisAdapter.notifyDataSetChanged();
+                setListViewHeightBasedOnItems(g_lv);
                 p_title.setText(productses.get(position).title);
                 price.setText(productses.get(position).price);
                 des.setText(productses.get(position).description);
+                mDemoSlider = (SliderLayout) findViewById(R.id.product_background_image);
+                for (int i = 0; i < productses.get(position).images.size(); i++) {
+                    DefaultSliderView defaultSliderView = new DefaultSliderView(ProductActivity.this);
+                    defaultSliderView.image(productses.get(pos).images.get(i).img).setScaleType(BaseSliderView.ScaleType.CenterCrop);
+                    mDemoSlider.addSlider(defaultSliderView);
+                }
+
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        s1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+        o1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductActivity.this, OrdersActivity.class);
+                startActivity(intent);
             }
         });
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProductActivity.this, AddProduct2Activity.class);
+                Intent intent = new Intent(ProductActivity.this, AddProductActivity.class);
                 intent.putExtra("new","1");
                 intent.putExtra("products", productses.get(pos));
                 startActivity(intent);
@@ -84,18 +118,51 @@ public class ProductActivity extends Activity {
         add_new.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ProductActivity.this,AddProduct2Activity.class);
+                Intent intent=new Intent(ProductActivity.this,AddProductActivity.class);
                 intent.putExtra("new","0");
 //                intent.putExtra("products",productses.get(pos));
                 startActivity(intent);
             }
         });
-        mDemoSlider = (SliderLayout)findViewById(R.id.view);
-            for (int i = 0; i < productses.get(pos).images.size(); i++) {
-                DefaultSliderView defaultSliderView = new DefaultSliderView(this);
-                defaultSliderView.image(productses.get(pos).images.get(i).img).setScaleType(BaseSliderView.ScaleType.CenterCrop);
-                mDemoSlider.addSlider(defaultSliderView);
+
+    }
+    public static boolean setListViewHeightBasedOnItems(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter != null) {
+
+            int numberOfItems = listAdapter.getCount();
+
+            // Get total height of all items.
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(0, 0);
+                totalItemsHeight += item.getMeasuredHeight();
             }
+
+            // Get total height of all item dividers.
+            int totalDividersHeight = listView.getDividerHeight() *
+                    (numberOfItems - 1);
+
+            // Set list height.
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if(vf.getDisplayedChild()==1)
+            vf.setDisplayedChild(0);
+        else
+            super.onBackPressed();
     }
     private void get_products() {
         String url;

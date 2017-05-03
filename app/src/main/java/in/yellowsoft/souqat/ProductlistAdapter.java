@@ -55,12 +55,12 @@ public class ProductlistAdapter extends BaseAdapter{
         View rowView;
         rowView = inflater.inflate(R.layout.company_list_item_screen, null);
         holder.com_name=(TextView) rowView.findViewById(R.id.company_list_name);
-        holder.com_items=(TextView) rowView.findViewById(R.id.company_list_items);
+//        holder.com_items=(TextView) rowView.findViewById(R.id.company_list_items);
         holder.price=(TextView) rowView.findViewById(R.id.p_price_tv);
         holder.stock=(TextView) rowView.findViewById(R.id.p_stock_tv);
         holder.com_logo=(ImageView) rowView.findViewById(R.id.com_list_logo);
         holder.com_name.setText(restaurants.get(position).getTitle(context));
-        holder.com_items.setText(restaurants.get(position).getdescription(context));
+//        holder.com_items.setText(restaurants.get(position).getdescription(context));
         holder.price.setText(restaurants.get(position).price+" KD ");
         holder.stock.setText(restaurants.get(position).stock);
         Picasso.with(context).load(restaurants.get(position).images.get(0).img).fit().into(holder.com_logo);
