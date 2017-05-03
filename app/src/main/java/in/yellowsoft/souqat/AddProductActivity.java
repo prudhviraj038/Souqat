@@ -31,9 +31,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
@@ -48,6 +50,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +92,7 @@ public class AddProductActivity extends Activity {
         gv=(GridView)findViewById(R.id.gv_img);
         add_new=getIntent().getStringExtra("new");
         if(add_new.equals("1")){
+            p_id=getIntent().getStringExtra("id");
             products=(Products)getIntent().getSerializableExtra("products");
         }
         back=(ImageView)findViewById(R.id.ap_back);
@@ -340,6 +345,8 @@ public class AddProductActivity extends Activity {
             recyclerView.setAdapter(mAdapter);
             for (int i = 0; i < products.images.size(); i++) {
                 im1.add(products.images.get(i).img);
+                temp=products.images.size();
+
             }
             imageAdapter=new ImageAdapter(this,im1);
             gv.setAdapter(imageAdapter);
@@ -349,17 +356,18 @@ public class AddProductActivity extends Activity {
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(products.images.get(position).img.startsWith("http")){
-                        delete_images(products.images.get(position).i_id);
+                if(im1.get(position).startsWith("http")){
+                    Log.e("image_id",products.images.get(position).i_id);
+                    delete_images(products.images.get(position).i_id,position);
                 }else{
                     im1.remove(position);
-                    img_path.remove(position);
+                    img_path.remove(position-temp);
                     imageAdapter.notifyDataSetChanged();
                 }
             }
         });
     }
-
+    int temp;
     boolean isimgchoosen = false;
     final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
@@ -517,35 +525,37 @@ public class AddProductActivity extends Activity {
 //        List<Part> files = new ArrayList();
 //        for (int i = 0; i < img_path.size(); i++) {
 //            files.add(new FilePart("image" + i, new File(img_path.get(i))));
-//        }
-        Log.e("jsonobjet_product", jsonObject.toString());
-        final ProgressBar progressBar = new ProgressBar(this);
-        final  ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait image is loading..");
-        progressDialog.setIndeterminate(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        Ion.with(this)
-                .load(Settings.SERVERURL + "product.php")
-                .uploadProgressBar(progressBar)
-                .uploadProgressHandler(new ProgressCallback() {
-                    @Override
-                    public void onProgress(long downloaded, long total) {
-                        progressDialog.setMax((int) total);
-                        progressDialog.setProgress((int) downloaded);
-                    }
-                })
-                .setMultipartParameter("product", jsonObject.toString())
-                .setMultipartParameter("shop_id", "1")
+//
+        if(add_new.equals("1")) {
+            Log.e("jsonobjet_product", jsonObject.toString());
+            final ProgressBar progressBar = new ProgressBar(this);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Please wait image is loading..");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            Ion.with(this)
+                    .load(Settings.SERVERURL + "product.php")
+                    .uploadProgressBar(progressBar)
+                    .uploadProgressHandler(new ProgressCallback() {
+                        @Override
+                        public void onProgress(long downloaded, long total) {
+                            progressDialog.setMax((int) total);
+                            progressDialog.setProgress((int) downloaded);
+                        }
+                    })
+                    .setMultipartParameter("product", jsonObject.toString())
+                    .setMultipartParameter("shop_id", "1")
+                    .setMultipartParameter("product_id", p_id)
 //                .setMultipartFile("file","image/png",new File(encodedString))
 //                .addMultipartParts(files)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        if (progressDialog != null)
-                            progressDialog.dismiss();
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+                            if (progressDialog != null)
+                                progressDialog.dismiss();
 //                        if (e != null) {
 //                            e.printStackTrace();
 //                        } else if (result.isJsonNull()) {
@@ -553,23 +563,76 @@ public class AddProductActivity extends Activity {
 //                        } else {
 //                            Log.e("image_path_response", result.toString());
 //                                finish();
-                        if (result.get("status").getAsString().equals("Success")) {
-                            p_id=result.get("product_id").getAsString();
-                            if(isimgchoosen){
-                                upload_images();
-                            }else {
+                            if (result.get("status").getAsString().equals("Success")) {
+                                if (isimgchoosen) {
+                                    upload_images();
+                                } else {
+                                    Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            } else {
                                 Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
-                                startActivity(intent);
-                                finish();
                             }
-                        } else {
-                            Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+
+
                         }
+                    });
+        }else{
+            Log.e("jsonobjet_product", jsonObject.toString());
+            final ProgressBar progressBar = new ProgressBar(this);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Please wait image is loading..");
+            progressDialog.setIndeterminate(false);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            Ion.with(this)
+                    .load(Settings.SERVERURL + "product.php")
+                    .uploadProgressBar(progressBar)
+                    .uploadProgressHandler(new ProgressCallback() {
+                        @Override
+                        public void onProgress(long downloaded, long total) {
+                            progressDialog.setMax((int) total);
+                            progressDialog.setProgress((int) downloaded);
+                        }
+                    })
+                    .setMultipartParameter("product", jsonObject.toString())
+                    .setMultipartParameter("shop_id", "1")
+//                .setMultipartFile("file","image/png",new File(encodedString))
+//                .addMultipartParts(files)
+                    .asJsonObject()
+                    .setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+                            if (progressDialog != null)
+                                progressDialog.dismiss();
+//                        if (e != null) {
+//                            e.printStackTrace();
+//                        } else if (result.isJsonNull()) {
+//                            Log.e("json_null", null);
+//                        } else {
+//                            Log.e("image_path_response", result.toString());
+//                                finish();
+                            if (result.get("status").getAsString().equals("Success")) {
+                                p_id = result.get("product_id").getAsString();
+                                if (isimgchoosen) {
+                                    upload_images();
+                                } else {
+                                    Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            } else {
+                                Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                            }
 
 
-                    }
-                });
+                        }
+                    });
+        }
     }
     int current=0;
     public void upload_images(){
@@ -630,52 +693,56 @@ public class AddProductActivity extends Activity {
                 });
     }
 
-    public void delete_images(String id){
-        final ProgressBar progressBar = new ProgressBar(this);
-        final  ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please wait image is loading..");
-        progressDialog.setIndeterminate(false);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        Ion.with(this)
-                .load(Settings.SERVERURL + "product-image-delete.php")
-                .uploadProgressBar(progressBar)
-                .uploadProgressHandler(new ProgressCallback() {
-                    @Override
-                    public void onProgress(long downloaded, long total) {
-                        progressDialog.setMax((int) total);
-                        progressDialog.setProgress((int) downloaded);
-                    }
-                })
-                .setMultipartParameter("product_id", p_id)
-                .setMultipartParameter("image_id", id)
-//                .setMultipartFile("file","image/png",new File(encodedString))
-//                .addMultipartParts(files)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        if (progressDialog != null)
-                            progressDialog.dismiss();
-//                        if (e != null) {
-//                            e.printStackTrace();
-//                        } else if (result.isJsonNull()) {
-//                            Log.e("json_null", null);
-//                        } else {
-//                            Log.e("image_path_response", result.toString());
-//                                finish();
-                        if (result.get("status").getAsString().equals("Failed")) {
-                            Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+    public void delete_images(String id, final int posi){
+        String url = null;
+            try {
+                url = Settings.SERVERURL + "product-image-delete.php?" +"product_id="+ URLEncoder.encode(p_id, "utf-8")+
+                        "&image_id="+URLEncoder.encode(id,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            Log.e("url--->", url);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Please wait....");
+//        progressDialog.setMessage(Settings.getword(this, "please_wait"));
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                    progressDialog.dismiss();
+                    Log.e("response is: ", jsonObject.toString());
+                    try {
+                        if (jsonObject.getString("status").equals("Failed")) {
+                            Toast.makeText(AddProductActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddProductActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            im1.remove(posi);
                             imageAdapter.notifyDataSetChanged();
                         }
 
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                });
-    }
+
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // TODO Auto-generated method stub
+                    Log.e("response is:", error.toString());
+                    Toast.makeText(AddProductActivity.this, "server_not_connected", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }
+
+            });
+
+// Access the RequestQueue through your singleton class.
+            AppController.getInstance().addToRequestQueue(jsObjRequest);
+
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

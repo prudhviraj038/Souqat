@@ -140,7 +140,7 @@ public class Products implements Serializable {
         Images(JSONObject jsonObject){
             try {
                 this.img=jsonObject.getString("image");
-                this.i_id=jsonObject.getString("id");
+                this.i_id=jsonObject.getString("image_id");
 //                this.thumb=jsonObject.getString("thumb");
             } catch (JSONException e) {
                 e.printStackTrace();

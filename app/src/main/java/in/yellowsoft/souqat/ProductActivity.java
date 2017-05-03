@@ -111,6 +111,7 @@ public class ProductActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProductActivity.this, AddProductActivity.class);
                 intent.putExtra("new","1");
+                intent.putExtra("id",productses.get(pos).res_id);
                 intent.putExtra("products", productses.get(pos));
                 startActivity(intent);
             }
