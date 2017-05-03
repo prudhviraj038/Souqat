@@ -350,7 +350,7 @@ public class AddProductActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(products.images.get(position).img.startsWith("http")){
-                        i_id=products.images.get(position).i_id;
+                        delete_images(products.images.get(position).i_id);
                 }else{
                     im1.remove(position);
                     img_path.remove(position);
@@ -630,7 +630,7 @@ public class AddProductActivity extends Activity {
                 });
     }
 
-    public void delete_images(){
+    public void delete_images(String id){
         final ProgressBar progressBar = new ProgressBar(this);
         final  ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait image is loading..");
@@ -649,7 +649,7 @@ public class AddProductActivity extends Activity {
                     }
                 })
                 .setMultipartParameter("product_id", p_id)
-                .setMultipartParameter("image_id", i_id)
+                .setMultipartParameter("image_id", id)
 //                .setMultipartFile("file","image/png",new File(encodedString))
 //                .addMultipartParts(files)
                 .asJsonObject()
