@@ -336,6 +336,12 @@ public class AddProductActivity extends Activity {
             recyclerView.setLayoutManager(mLayoutManager1);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(mAdapter);
+            for (int i = 0; i < products.images.size(); i++) {
+                im1.add(products.images.get(i).img);
+            }
+            imageAdapter=new ImageAdapter(this,im1);
+            gv.setAdapter(imageAdapter);
+            imageAdapter.notifyDataSetChanged();
 
         }
     }

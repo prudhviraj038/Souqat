@@ -2,6 +2,7 @@ package in.yellowsoft.souqat;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,13 @@ public class ImageAdapter extends BaseAdapter{
         View rowView;
         rowView = inflater.inflate(R.layout.image_grid_item, null);
         holder.im=(ImageView)rowView.findViewById(R.id.img_add_img);
-        holder.im.setImageBitmap(BitmapFactory.decodeFile(img.get(position)));
-//        Picasso.with(context).load(img.get(position)).fit().into(holder.im);
+        Log.e("img_size",String.valueOf(img.size()));
+        if(img.get(position).startsWith("http")){
+            Picasso.with(context).load(img.get(position)).fit().into(holder.im);
+        }else {
+            holder.im.setImageBitmap(BitmapFactory.decodeFile(img.get(position)));
+        }
+
         return rowView;
     }
 
