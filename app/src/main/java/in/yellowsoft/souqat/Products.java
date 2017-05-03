@@ -136,10 +136,11 @@ public class Products implements Serializable {
         }
     }
     public class Images implements Serializable{
-        String img,thumb;
+        String img,thumb,i_id;
         Images(JSONObject jsonObject){
             try {
                 this.img=jsonObject.getString("image");
+                this.i_id=jsonObject.getString("id");
 //                this.thumb=jsonObject.getString("thumb");
             } catch (JSONException e) {
                 e.printStackTrace();

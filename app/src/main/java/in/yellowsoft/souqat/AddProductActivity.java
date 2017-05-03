@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -75,6 +76,7 @@ public class AddProductActivity extends Activity {
     ArrayList<String> img_path;
     GridView gv;
     ImageAdapter imageAdapter;
+    String i_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -344,7 +346,20 @@ public class AddProductActivity extends Activity {
             imageAdapter.notifyDataSetChanged();
 
         }
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(products.images.get(position).img.startsWith("http")){
+                        i_id=products.images.get(position).i_id;
+                }else{
+                    im1.remove(position);
+                    img_path.remove(position);
+                    imageAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
+
     boolean isimgchoosen = false;
     final int RESULT_LOAD_IMAGE = 1;
     String imgDecodableString;
@@ -608,6 +623,53 @@ public class AddProductActivity extends Activity {
                                 startActivity(intent);
                                 finish();
                             }
+                        }
+
+
+                    }
+                });
+    }
+
+    public void delete_images(){
+        final ProgressBar progressBar = new ProgressBar(this);
+        final  ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please wait image is loading..");
+        progressDialog.setIndeterminate(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        Ion.with(this)
+                .load(Settings.SERVERURL + "product-image-delete.php")
+                .uploadProgressBar(progressBar)
+                .uploadProgressHandler(new ProgressCallback() {
+                    @Override
+                    public void onProgress(long downloaded, long total) {
+                        progressDialog.setMax((int) total);
+                        progressDialog.setProgress((int) downloaded);
+                    }
+                })
+                .setMultipartParameter("product_id", p_id)
+                .setMultipartParameter("image_id", i_id)
+//                .setMultipartFile("file","image/png",new File(encodedString))
+//                .addMultipartParts(files)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (progressDialog != null)
+                            progressDialog.dismiss();
+//                        if (e != null) {
+//                            e.printStackTrace();
+//                        } else if (result.isJsonNull()) {
+//                            Log.e("json_null", null);
+//                        } else {
+//                            Log.e("image_path_response", result.toString());
+//                                finish();
+                        if (result.get("status").getAsString().equals("Failed")) {
+                            Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(AddProductActivity.this, result.get("message").getAsString(), Toast.LENGTH_SHORT).show();
+                            imageAdapter.notifyDataSetChanged();
                         }
 
 
