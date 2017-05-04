@@ -77,6 +77,7 @@ public class ProductActivity extends Activity {
                 p_title.setText(productses.get(position).title);
                 price.setText(productses.get(position).price);
                 des.setText(productses.get(position).description);
+                stock.setText(productses.get(position).stock);
                 mDemoSlider = (SliderLayout) findViewById(R.id.product_background_image);
                 for (int i = 0; i < productses.get(position).images.size(); i++) {
                     DefaultSliderView defaultSliderView = new DefaultSliderView(ProductActivity.this);

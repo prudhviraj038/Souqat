@@ -117,35 +117,57 @@
                             android:scaleType="fitXY" />
 
                         <LinearLayout
-                            android:orientation="horizontal"
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#ffffff"
-                            android:padding="10dp">
+                            android:layout_gravity="center_horizontal" >
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="New Text"
-                                android:id="@+id/p_dis_title"
-                                android:layout_weight="1"
-                                android:textColor="#000"
-                                android:textSize="15sp" />
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="#d3d3d3"></LinearLayout>
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="New Text"
-                                android:id="@+id/p_dis_price"
-                                android:textColor="#000"
-                                android:textSize="15sp" />
+                                android:background="#ffffff"
+                                android:padding="10dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="New Text"
+                                    android:id="@+id/p_dis_title"
+                                    android:layout_weight="1"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="New Text"
+                                    android:id="@+id/p_dis_price"
+                                    android:textColor="#000"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="#d3d3d3" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#ffffff"
+                            android:background="@drawable/white_rounded_corners_with_bo"
                             android:padding="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"
@@ -175,7 +197,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="#ffffff"
+                            android:background="@drawable/white_rounded_corners_with_bo"
                             android:padding="10dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="10dp"

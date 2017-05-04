@@ -15,7 +15,7 @@
             android:text="New Text"
             android:id="@+id/o_title_adp"
             android:layout_weight="1"
-            android:textColor="#ffffff"
+            android:textColor="#000"
             android:textSize="15sp" />
 
         <TextView
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/o_price_adp"
-            android:textColor="#ffffff"
+            android:textColor="#000"
             android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>
